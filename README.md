@@ -1,44 +1,50 @@
 # MoodBite 🍪
 
-MoodBite adalah aplikasi pemantau suasana hati (*mood tracker*) berbasis Flutter yang dirancang untuk membantu pengguna menyelaraskan kondisi emosional dengan asupan nutrisi harian mereka. 
+MoodBite adalah aplikasi pemantau suasana hati (*mood tracker*) berbasis perangkat bergerak (*mobile*) yang dibangun menggunakan Flutter SDK. Aplikasi ini dirancang secara khusus untuk membantu pengguna menyelaraskan kondisi emosional dengan manajemen asupan nutrisi harian yang tepat.
 
-Dokumen ini disusun sebagai pemenuhan **Ujian Tengah Semester (UTS) Mata Kuliah Mobile Computing**.
-
----
-
-## 🎨 Tautan Desain Figma
-Seluruh implementasi komponen antarmuka (UI/UX) dan alur aplikasi ini mengacu pada tautan yang dapat diakses secara publik yaitu :
-👉 [**https://www.figma.com/design/4MTzeDKDDGYWbzJFlnBQzS/MoodBite?node-id=0-1&t=pDwhFWggBABLLXOE-1**]
+Dokumen ini disusun sebagai wujud pemenuhan komponen penilaian **Ujian Tengah Semester (UTS) pada mata kuliah Mobile Computing**.
 
 ---
 
-## ✨ Fitur Utama
-* **Nourish Path:** Sebuah modul interaktif dan personal di halaman beranda yang menjadi inti dari aplikasi MoodBite. Fitur ini mengajak pengguna memulai perjalanan (*"Mulai Perjalanan"*) untuk mengubah atau menyelaraskan suasana hati (*mood*) mereka saat itu menjadi aksi nutrisi nyata yang berfokus pada menenangkan pikiran serta menjaga kesehatan tubuh.
+## 🎨 Tautan Desain (Figma)
+
+Seluruh implementasi antarmuka komponen visual (UI), pengalaman pengguna (UX), serta alur navigasi dari aplikasi ini mengacu sepenuhnya pada rancangan desain digital yang dapat diakses melalui tautan berikut:
+👉 [**Desain Prototipe MoodBite di Figma**](https://www.figma.com/design/4MTzeDKDDGYWbzJFlnBQzS/MoodBite?node-id=0-1&t=pDwhFWggBABLLXOE-1)
 
 ---
 
-## 📐 Cakupan Implementasi Widget & Penjelasannya
+## ✨ Fitur Utama (Konsep Komponen Utama)
 
-* **Scaffold** : Berfungsi sebagai fondasi utama halaman, struktur dasar layar, dan pengatur warna latar belakang aplikasi (`#F9FAFC`) agar sinkron dengan panduan warna di Figma.
-* **Column** : Berfungsi untuk menyusun barisan komponen visual (seperti logo, judul teks, kotak input, dan tombol) secara vertikal dari atas ke bawah.
-* **Row** : Berfungsi untuk menyusun elemen visual (seperti teks pemancing dan tautan navigasi tombol *"Daftar"*) secara horizontal agar sejajar ke samping pada area *footer*.
-* **Padding & SizedBox** : Berfungsi sebagai pengatur dimensi jarak tepi dalam layar dan pemberi ruang kosong (*spacing*) vertikal/horizontal antar-widget agar presisi dengan ukuran desain asli.
-* **Center** : Berfungsi untuk menyelaraskan seluruh blok kontainer formulir login agar posisinya otomatis berada tepat di tengah-tengah layar perangkat.
-* **SingleChildScrollView** : Berfungsi menyediakan fitur gulir otomatis pada layar saat papan ketik aktif, mencegah terjadinya eror kebocoran piksel (*pixel overflow*).
-* **StatefulWidget vs StatelessWidget** : `LoginPage` menggunakan *StatefulWidget* untuk mengelola state dinamis seperti validasi formulir dan visibilitas password. Sementara `HomePagePlaceholder` menggunakan *StatelessWidget* karena hanya menampilkan elemen statis (logo dan pesan selamat datang) tanpa perubahan data internal.
-* **Form & GlobalKey\<FormState\>** : Berfungsi sebagai wadah pengontrol terpusat untuk melacak, mengidentifikasi, dan memvalidasi keabsahan status seluruh kolom input secara bersamaan.
-* **TextFormField & Validator** : Berfungsi sebagai komponen kolom input teks interaktif yang dibekali logika pengecekan otomatis untuk mendeteksi teks kosong, struktur email (menggunakan RegEx), dan panjang sandi minimal 8 karakter.
-* **setState()** : Berfungsi sebagai fungsi pemicu untuk merender ulang komponen UI secara *real-time* saat status data berubah (seperti mengubah visibilitas kata sandi dan memunculkan status memuat).
-* **CircularProgressIndicator** : Berfungsi menampilkan animasi lingkaran berputar sebagai indikator umpan balik visual bahwa aplikasi sedang memproses verifikasi data login.
-* **Navigator.pushReplacement()** : Berfungsi untuk berpindah halaman dari `LoginPage` menuju `HomePagePlaceholder` dengan cara menggantikan halaman lama di dalam tumpukan (*stack*), sehingga pengguna tidak bisa kembali ke halaman login setelah berhasil masuk.
-* **TextEditingController.clear()** : Berfungsi untuk membersihkan sisa teks di dalam kolom input sesaat sebelum sistem melakukan perpindahan halaman.
+* **Nourish Path:** Modul interaktif personal yang ditempatkan pada halaman beranda sebagai fungsionalitas inti dari aplikasi MoodBite. Fitur ini memandu pengguna untuk memulai perjalanan (*"Mulai Perjalanan"*) dalam mentransformasikan atau mengelola suasana hati (*mood*) mereka saat itu menjadi tindakan pemenuhan nutrisi riil, dengan fokus pada stabilisasi pikiran serta pemeliharaan kesehatan tubuh.
 
 ---
 
-## 🚀 Cara Menjalankan Aplikasi
-1. Pastikan Flutter SDK telah terpasang dengan baik di perangkat Anda.
-2. Klona (*clone*) repository ini ke dalam direktori lokal komputer Anda.
-3. Jalankan perintah berikut pada terminal proyek untuk mengunduh semua dependensi dan menjalankan aplikasi:
+## 📐 Cakupan Widget & Dokumentasi Arsitektur Kode
+
+Berikut adalah daftar komponen widget beserta dokumentasi teknis implementasinya di dalam repositori proyek ini:
+
+* **Scaffold** : Bertindak sebagai fondasi utama halaman, menyediakan struktur dasar tata letak layar, serta mengatur warna latar belakang aplikasi (`#F9FAFC`) agar selaras dengan skema warna sistem pada Figma.
+* **Column** : Berfungsi untuk menyusun susunan komponen visual (seperti aset logo, komponen teks judul, kolom input formulir, dan tombol aksi) secara vertikal dari atas ke bawah.
+* **Row** : Digunakan untuk mengorganisasikan elemen visual secara horizontal (sejajar ke samping) pada area *footer*, seperti pada teks penunjuk akun dan tautan tombol *"Daftar"*.
+* **Padding & SizedBox** : Berfungsi sebagai pengatur dimensi jarak tepi dalam (*margin/padding*) layar serta menyediakan ruang kosong (*spacing*) vertikal/horizontal antar-widget untuk mencapai presisi tata letak (*layout*) yang sesuai dengan desain asli.
+* **Center** : Berfungsi untuk memosisikan blok kontainer utama formulir autentikasi agar berada tepat di titik tengah geometris layar perangkat pengguna.
+* **SingleChildScrollView** : Menyediakan fungsionalitas gulir (*scroll*) adaptif pada layar saat papan ketik virtual (*keyboard*) aktif, guna mencegah terjadinya galat kebocoran piksel (*pixel overflow error*).
+* **StatefulWidget vs StatelessWidget** : 
+  * `LoginPage` diimplementasikan sebagai *StatefulWidget* untuk mengelola perubahan status (*state*) UI secara dinamis, seperti validasi data masukan formulir dan visibilitas teks kata sandi.
+  * `HomePagePlaceholder` diimplementasikan sebagai *StatelessWidget* karena hanya bertugas merender elemen statis (logo dan pesan selamat datang) tanpa adanya perubahan data internal pada layar tersebut.
+* **Form & GlobalKey\<FormState\>** : Berfungsi sebagai kontainer pengontrol terpusat yang melacak, mengidentifikasi, dan memvalidasi keabsahan status seluruh kolom input formulir secara simultan.
+* **TextFormField & Validator** : Komponen kolom input teks interaktif yang dilengkapi dengan logika pengecekan otomatis untuk mendeteksi string kosong, validasi struktur surat elektronik menggunakan ekspresi reguler (*Regular Expression / RegEx*), serta pembatasan panjang kata sandi minimal 8 karakter.
+* **setState()** : Fungsi mutasi *state* bawaan Flutter yang memicu perenderaan ulang (*rebuild*) komponen UI secara *real-time* saat terjadi perubahan status data (seperti mengubah ikon mata sandi dan mengaktifkan status memuat).
+* **CircularProgressIndicator** : Menampilkan animasi indikator pemrosesan berbentuk lingkaran sebagai umpan balik visual (*visual feedback*) bahwa sistem sedang mengeksekusi verifikasi kredensial login.
+* **Navigator.pushReplacement()** : Mengontrol alur navigasi perpindahan halaman dari `LoginPage` menuju `HomePagePlaceholder` dengan cara menggantikan (*replace*) riwayat halaman lama dalam tumpukan memori (*stack*), sehingga mencegah pengguna kembali ke halaman autentikasi saat menekan tombol kembali fisik perangkat.
+* **TextEditingController.clear()** : Metode yang digunakan untuk menghapus dan membersihkan sisa teks residu di dalam kolom input sesaat sebelum sistem dialihkan menuju halaman utama.
+
+---
+
+## 🚀 Panduan Menjalankan Proyek (Deployment)
+
+1. Pastikan perangkat Anda telah terkonfigurasi dengan **Flutter SDK** versi stabil.
+2. Lakukan klon (*clone*) repositori ini ke dalam direktori lokal komputer Anda.
+3. Buka terminal pada direktori proyek tersebut, lalu jalankan perintah berikut untuk mengunduh seluruh dependensi (*packages*) yang tertera pada `pubspec.yaml`:
    ```bash
    flutter pub get
-   flutter run
