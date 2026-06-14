@@ -25,20 +25,20 @@ Seluruh implementasi komponen antarmuka (UI/UX) dan alur aplikasi ini mengacu pa
 * **Padding & SizedBox** : Berfungsi sebagai pengatur dimensi jarak tepi dalam layar dan pemberi ruang kosong (*spacing*) vertikal/horizontal antar-widget agar presisi dengan ukuran desain asli.
 * **Center** : Berfungsi untuk menyelaraskan seluruh blok kontainer formulir login agar posisinya otomatis berada tepat di tengah-tengah layar perangkat.
 * **SingleChildScrollView** : Berfungsi menyediakan fitur gulir otomatis pada layar saat papan ketik aktif, mencegah terjadinya eror kebocoran piksel (*pixel overflow*).
-* **StatefulWidget** : Berfungsi sebagai basis kelas komponen halaman dinamis yang memungkinkan UI memperbarui tampilannya secara instan saat terjadi interaksi pengguna.
+* **StatefulWidget vs StatelessWidget** : `LoginPage` menggunakan *StatefulWidget* untuk mengelola state dinamis seperti validasi formulir dan visibilitas password. Sementara `HomePagePlaceholder` menggunakan *StatelessWidget* karena hanya menampilkan elemen statis (logo dan pesan selamat datang) tanpa perubahan data internal.
 * **Form & GlobalKey\<FormState\>** : Berfungsi sebagai wadah pengontrol terpusat untuk melacak, mengidentifikasi, dan memvalidasi keabsahan status seluruh kolom input secara bersamaan.
-* **TextFormField & Validator** : Berfungsi sebagai komponen kolom input teks interaktif yang dibekali logika pengecekan otomatis untuk mendeteksi teks kosong, struktur email tiruan (menggunakan RegEx), dan panjang sandi minimal 8 karakter.
-* **setState()** : Berfungsi sebagai fungsi pemicu untuk merender ulang komponen UI secara *real-time* saat status data berubah (seperti mengubah visibilitas kata sandi dan status memuat).
-* **CircularProgressIndicator** : Berfungsi menampilkan animasi lingkaran berputar sebagai indikator umpan balik visual bahwa aplikasi sedang memproses verifikasi data.
-* **showDialog & AlertDialog** : Berfungsi untuk menampilkan jendela *pop-up overlay* estetik di atas halaman utama untuk memberikan informasi keberhasilan akses autentikasi.
-* **Navigator.pop(context)** : Berfungsi sebagai fungsi kendali navigasi dasar untuk menutup kembali jendela dialog secara programatis dari memori tumpukan (*stack*).
-* **TextEditingController.clear()** : Berfungsi untuk membersihkan kembali sisa-sisa teks yang tertinggal di dalam kolom input sesaat setelah jendela dialog ditutup pengguna.
+* **TextFormField & Validator** : Berfungsi sebagai komponen kolom input teks interaktif yang dibekali logika pengecekan otomatis untuk mendeteksi teks kosong, struktur email (menggunakan RegEx), dan panjang sandi minimal 8 karakter.
+* **setState()** : Berfungsi sebagai fungsi pemicu untuk merender ulang komponen UI secara *real-time* saat status data berubah (seperti mengubah visibilitas kata sandi dan memunculkan status memuat).
+* **CircularProgressIndicator** : Berfungsi menampilkan animasi lingkaran berputar sebagai indikator umpan balik visual bahwa aplikasi sedang memproses verifikasi data login.
+* **Navigator.pushReplacement()** : Berfungsi untuk berpindah halaman dari `LoginPage` menuju `HomePagePlaceholder` dengan cara menggantikan halaman lama di dalam tumpukan (*stack*), sehingga pengguna tidak bisa kembali ke halaman login setelah berhasil masuk.
+* **TextEditingController.clear()** : Berfungsi untuk membersihkan sisa teks di dalam kolom input sesaat sebelum sistem melakukan perpindahan halaman.
 
 ---
 
 ## 🚀 Cara Menjalankan Aplikasi
 1. Pastikan Flutter SDK telah terpasang dengan baik di perangkat Anda.
 2. Klona (*clone*) repository ini ke dalam direktori lokal komputer Anda.
-3. Jalankan perintah berikut pada terminal proyek untuk mengunduh semua dependensi:
+3. Jalankan perintah berikut pada terminal proyek untuk mengunduh semua dependensi dan menjalankan aplikasi:
    ```bash
    flutter pub get
+   flutter run

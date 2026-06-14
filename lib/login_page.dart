@@ -8,98 +8,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // MATERI PERTEMUAN 5: GlobalKey untuk validasi status Form
   final _formKey = GlobalKey<FormState>();
-
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   bool _obscurePassword = true;
   bool _isLoading = false;
-
-  // Fungsi Pop-up Dialog Sukses dengan kalimat interaktif pilihanmu
-  void _showSuccessDialog() {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          backgroundColor: Colors.white,
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: 10),
-              Container(
-                width: 70,
-                height: 70,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Image.asset(
-                    'assets/logo_moodbite.jpg',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Masuk Berhasil!',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF2C3E35), // Warna Hijau Gelap Figma
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Text(
-                'Yey, sukses masuk! Yuk, ceritain perasaan dan energi kamu hari ini.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Color(0xFF7E7E7E), // Warna Abu-abu Figma
-                  height: 1.4,
-                ),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    _emailController.clear();
-                    _passwordController.clear();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(
-                      0xFF94B4A4,
-                    ), // Warna Hijau Sage Figma
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                        14,
-                      ), // Radius 14 Figma
-                    ),
-                  ),
-                  child: const Text(
-                    'Selesai',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
 
   void _handleLogin() {
     if (_formKey.currentState!.validate()) {
@@ -107,12 +21,21 @@ class _LoginPageState extends State<LoginPage> {
         _isLoading = true;
       });
 
-      Future.delayed(const Duration(milliseconds: 1200), () {
+      Future.delayed(const Duration(milliseconds: 800), () {
         if (mounted) {
           setState(() {
             _isLoading = false;
           });
-          _showSuccessDialog();
+
+          _emailController.clear();
+          _passwordController.clear();
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomePagePlaceholder(),
+            ),
+          );
         }
       });
     }
@@ -127,15 +50,12 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    // VARIABEL WARNA BERDASARKAN HASIL INSPECT FIGMA KAMU
-    const Color primaryGreen = Color(0xFF94B4A4); // Dari Gambar Figma (#94B4A4)
-    const Color darkGreen = Color(0xFF2C3E35); // Dari Gambar Figma (#2C3E35)
-    const Color textGrey = Color(0xFF7E7E7E); // Dari Gambar Figma (#7E7E7E)
+    const Color primaryGreen = Color(0xFF94B4A4);
+    const Color darkGreen = Color(0xFF2C3E35);
+    const Color textGrey = Color(0xFF7E7E7E);
 
     return Scaffold(
-      backgroundColor: const Color(
-        0xFFF9FAFC,
-      ), // Warna background putih kebiruan sesuai Figma terbarumu!
+      backgroundColor: const Color(0xFFF9FAFC),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -145,7 +65,6 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Logo Maskot Utama MoodBite
                   Center(
                     child: Container(
                       width: 95,
@@ -153,12 +72,11 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(24),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
-                            // Menggunakan Color.fromRGBO agar 100% AMAN dari warning di semua versi Flutter
-                            color: const Color.fromRGBO(0, 0, 0, 0.04),
+                            color: Color.fromRGBO(0, 0, 0, 0.04),
                             blurRadius: 20,
-                            offset: const Offset(0, 10),
+                            offset: Offset(0, 10),
                           ),
                         ],
                       ),
@@ -172,8 +90,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 24),
-
-                  // TEKS JUDUL UTAMA - PRESISI FIGMA
                   const Text(
                     'MoodBite',
                     textAlign: TextAlign.center,
@@ -186,15 +102,12 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 6),
 
-                  // TEKS TAGLINE - PRESISI FIGMA
                   const Text(
-                    'Feed Your Mind, Fuel Your Body',
+                    'Pahami Moodmu, Penuhi Nutrisimu',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 13, color: textGrey),
                   ),
                   const SizedBox(height: 40),
-
-                  // INPUT EMAIL
                   const Text(
                     'Email kamu',
                     style: TextStyle(
@@ -220,9 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                         vertical: 14,
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          14,
-                        ), // Radius 14 sesuai Figma
+                        borderRadius: BorderRadius.circular(14),
                         borderSide: BorderSide.none,
                       ),
                       errorBorder: OutlineInputBorder(
@@ -240,26 +151,20 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    // VALIDASI EMAIL REFORMASI (MENGGUNAKAN REGEX STANDAR APLIKASI ASLI)
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Email tidak boleh kosong';
                       }
-
-                      // Pola untuk mencocokkan struktur email valid secara utuh
                       String pattern =
                           r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
                       RegExp regExp = RegExp(pattern);
-
                       if (!regExp.hasMatch(value)) {
-                        return 'Format email salah (contoh: nama@email.com)';
+                        return 'Alamat email tidak valid';
                       }
                       return null;
                     },
                   ),
                   const SizedBox(height: 20),
-
-                  // INPUT KATA SANDI
                   const Text(
                     'Kata sandi',
                     style: TextStyle(
@@ -285,9 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                         vertical: 14,
                       ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(
-                          14,
-                        ), // Radius 14 sesuai Figma
+                        borderRadius: BorderRadius.circular(14),
                         borderSide: BorderSide.none,
                       ),
                       errorBorder: OutlineInputBorder(
@@ -330,7 +233,6 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                   const SizedBox(height: 8),
-
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -347,8 +249,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   const SizedBox(height: 24),
-
-                  // TOMBOL UTAMA MASUK - PRESISI FIGMA
                   ElevatedButton(
                     onPressed: _isLoading ? null : _handleLogin,
                     style: ElevatedButton.styleFrom(
@@ -356,9 +256,7 @@ class _LoginPageState extends State<LoginPage> {
                       elevation: 0,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          14,
-                        ), // Radius 14 dari Figma
+                        borderRadius: BorderRadius.circular(14),
                       ),
                     ),
                     child: _isLoading
@@ -380,8 +278,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                   ),
                   const SizedBox(height: 32),
-
-                  // Footer Daftar Akun
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -405,6 +301,72 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// HALAMAN UTAMA SEMENTARA
+class HomePagePlaceholder extends StatelessWidget {
+  const HomePagePlaceholder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF9FAFC),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(24),
+                  child: Image.asset(
+                    'assets/logo_moodbite.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              const Text(
+                'Selamat Datang di Beranda MoodBite',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF2C3E35),
+                ),
+              ),
+              const SizedBox(height: 48),
+
+              // Tombol Keluar Kembali ke Login
+              TextButton.icon(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+                },
+                icon: const Icon(Icons.logout, color: Colors.redAccent),
+                label: const Text(
+                  'Keluar',
+                  style: TextStyle(
+                    color: Colors.redAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
